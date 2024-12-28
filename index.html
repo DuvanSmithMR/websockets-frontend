@@ -26,6 +26,12 @@
             socket.send(message);
         }
 
+        function renderMessage(message) {
+            const li = document.createElement('li');
+            li.textContent = message;
+            messages.prepend(li);
+        }
+
         form.addEventListener('submit', (event) => {
             event.preventDefault();
             const message = input.value;
@@ -43,12 +49,8 @@
         };
 
         socket.onmessage = (event) => {
-            const li = document.createElement('li');
-
             const { payload } = JSON.parse(event.data);
-            
-            li.textContent = payload;
-            messages.appendChild(li);
+            renderMessage(payload);
         };
     </script>
 </body>
