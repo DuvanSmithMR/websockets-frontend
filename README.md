@@ -6,4 +6,4 @@ Ejecutar el archivo como servidor:
 1. Abrir la ubicacion del archivo: ``` cd websocket-frontend ```
 2. Ejecutar comando ``` npx http-server -o ```
 3. Aceptar instalacion del paquete.
-4. Probar aplicacion.
+4. Probar aplicacion en la url ``` Open: http://127.0.0.1:8081 ```.
