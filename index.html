@@ -32,20 +32,22 @@
             sendMessage(message);
         });
 
-        socket.onopen = (event)=> {
+        socket.onopen = (event) => {
             console.log(event);
             console.log('Conectado');
         };
 
-        socket.onclose = (event)=> {
+        socket.onclose = (event) => {
             console.log(event);
             console.log('Desconectado');
         };
 
-        socket.onmessage = (event)=> {
-            console.log(event);
+        socket.onmessage = (event) => {
             const li = document.createElement('li');
-            li.textContent = event.data;
+
+            const { payload } = JSON.parse(event.data);
+            
+            li.textContent = payload;
             messages.appendChild(li);
         };
     </script>
