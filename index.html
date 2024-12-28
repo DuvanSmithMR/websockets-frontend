@@ -17,6 +17,16 @@
     <ul id="messages"></ul>
     <script>
         const socket = new WebSocket('ws://localhost:7535');
+
+        socket.onopen = (event)=> {
+            console.log(event);
+            console.log('Conectado');
+        };
+
+        socket.onclose = (event)=> {
+            console.log(event);
+            console.log('Desconectado');
+        };
     </script>
 </body>
 
