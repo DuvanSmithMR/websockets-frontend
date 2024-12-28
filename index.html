@@ -16,29 +16,32 @@
     </form>
     <ul id="messages"></ul>
     <script>
+        let socket = null;
+
         const form = document.querySelector('form');
         const input = document.querySelector('input');
         const messages = document.querySelector('#messages');
         const small = document.querySelector('small');
 
+        function sendMessage(message) {
+            socket?.send(message);
+        }
+
+        function renderMessage(message) {
+            const li = document.createElement('li');
+            li.textContent = message;
+            messages.prepend(li);
+        }
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const message = input.value;
+            sendMessage(message);
+            input.value = '';
+        });
+
         function connectToServer() {
-            const socket = new WebSocket('ws://localhost:7535');
-
-            function sendMessage(message) {
-                socket.send(message);
-            }
-
-            function renderMessage(message) {
-                const li = document.createElement('li');
-                li.textContent = message;
-                messages.prepend(li);
-            }
-
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
-                const message = input.value;
-                sendMessage(message);
-            });
+            socket = new WebSocket('ws://localhost:7535');
 
             socket.onopen = (event) => {
                 small.innerText = 'Conectado';
